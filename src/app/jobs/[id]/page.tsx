@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import { auth } from "../../../../auth";
+import DeleteButton from "../../../../components/DeleteButton";
 export default async function JobDetail({
   params,
 }: {
@@ -161,6 +162,7 @@ export default async function JobDetail({
                     >
                       Chỉnh sửa bài đăng
                     </Link>
+                    <DeleteButton jobId={job.id}/>
                   </div>
                 )}
               </div>
