@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Trash2, AlertTriangle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function DeleteButton({ jobId }: { jobId: string }) {
   const [open, setOpen] = useState(false);
@@ -21,44 +23,63 @@ export default function DeleteButton({ jobId }: { jobId: string }) {
       alert("Không thể xoá bài đăng");
       return;
     }
-
-    router.push("/jobs");
   };
 
   return (
     <>
-      <button
+      
+      <Button
         onClick={() => setOpen(true)}
-        className="block w-full text-center bg-red-50 text-red-600 py-3 rounded-xl font-semibold hover:bg-red-100 transition"
+        className="text-red-600 hover:text-red-800"
+        title="Xoá bài đăng"
       >
-        Xoá bài đăng
-      </button>
+        <Trash2 size={16} />
+      </Button>
 
+      {/* Modal */}
       {open && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md">
-            <h3 className="text-lg font-bold text-gray-900">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={() => setOpen(false)}
+          />
+
+          {/* Modal box */}
+          <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6 animate-in fade-in zoom-in">
+            {/* Icon */}
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-100 text-red-600 mb-4">
+              <AlertTriangle size={22} />
+            </div>
+
+            {/* Content */}
+            <h3 className="text-xl font-bold text-gray-900 text-center">
               Xác nhận xoá bài đăng
             </h3>
-            <p className="text-gray-600 mt-2">
-              Hành động này <b>không thể hoàn tác</b>. Bạn có chắc chắn muốn
-              xoá?
+
+            <p className="text-gray-600 text-sm text-center mt-3 leading-relaxed">
+              Hành động này <span className="font-semibold">không thể hoàn tác</span>.
+              <br />
+              Bạn có chắc chắn muốn xoá bài đăng này không?
             </p>
 
-            <div className="flex justify-end gap-3 mt-6">
-              <button
+            {/* Actions */}
+            <div className="mt-6 flex gap-3">
+              <Button
                 onClick={() => setOpen(false)}
-                className="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200"
+                disabled={loading}
+                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50 transition disabled:opacity-50"
               >
                 Huỷ
-              </button>
-              <button
+              </Button>
+
+              <Button
                 onClick={handleDelete}
                 disabled={loading}
-                className="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 disabled:opacity-60"
+                className="flex-1 rounded-lg bg-red-600 px-4 py-2 text-white font-medium hover:bg-red-700 transition disabled:opacity-60"
               >
                 {loading ? "Đang xoá..." : "Xoá"}
-              </button>
+              </Button>
             </div>
           </div>
         </div>

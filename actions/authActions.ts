@@ -1,9 +1,9 @@
 'use server'
-import { signIn, signOut } from "../auth"
+import { signIn} from "../auth"
 export const login = async () => {
-    await signIn('github', {redirectTo : '/'})
+    await signIn('github',  { prompt: "select_account", redirectTo : '/' })
 }
 
-export const logout = async() => {
-    await signOut({redirectTo : '/auth/signin'})
+export const loginGoogle = async() => {
+    await signIn('google', {redirectTo :'/'})
 }

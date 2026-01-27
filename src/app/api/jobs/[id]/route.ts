@@ -1,6 +1,8 @@
 import { prisma } from "../../../../../libs/prisma";
 import { auth } from "../../../../../auth";
 import { NextResponse } from "next/server";
+
+// update job
 export async function PUT(
   req: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -34,6 +36,7 @@ export async function PUT(
   }
 }
 
+// Get job detail
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -48,7 +51,7 @@ export async function GET(
   }
 }
 
-
+// delete job
 export async function DELETE(req : Request, {params} : {params : Promise<{id : string}>}) {
   const session = await auth()
   if (!session || !session.user) {
