@@ -1,0 +1,35 @@
+name: CI for Next.js + Prisma
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Lint (Biome)
+        run: npm run lint
+
+      - name: Build Next.js
+        run: npm run build
+
+env:
+  DATABASE_URL: "postgresql://neondb_owner:npg_4bdrD3anvsYW@ep-wispy-lab-a1f332uk.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
