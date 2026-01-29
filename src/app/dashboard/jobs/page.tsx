@@ -1,8 +1,7 @@
-import Link from "next/link";
-import { Trash2, Pencil, Eye } from "lucide-react";
+
 import { prisma } from "../../../../libs/prisma";
-import { Job } from "@/generated/prisma";
-import { Button } from "@/components/ui/button";
+import type { Job } from "@/generated/prisma";
+
 import AdminJobsManagement from "../../../../components/AdminJobsManagement";
 const page = async () => {
   const jobs: Job[] = await prisma.job.findMany({

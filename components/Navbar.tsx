@@ -18,7 +18,6 @@ import { useRouter } from "next/navigation";
 const Navbar = () => {
   const { data: session } = useSession();
   const { theme, setTheme } = useTheme();
-  const router = useRouter();
   const avatar =
     session?.user?.image ||
     `https://ui-avatars.com/api/?name=${session?.user?.name}`;
