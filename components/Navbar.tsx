@@ -18,15 +18,14 @@ import { useRouter } from "next/navigation";
 const Navbar = () => {
   const { data: session } = useSession();
   const { theme, setTheme } = useTheme();
-  const router = useRouter()
+  const router = useRouter();
   const avatar =
     session?.user?.image ||
     `https://ui-avatars.com/api/?name=${session?.user?.name}`;
 
-  
-    const handleLogout = async() => {
-      await signOut({redirectTo : '/auth/signin'})
-    }
+  const handleLogout = async () => {
+    await signOut({ redirectTo: "/auth/signin" });
+  };
 
   return (
     <nav className="border-b bg-background">
@@ -107,9 +106,7 @@ const Navbar = () => {
                 <DropdownMenuSeparator />
 
                 <DropdownMenuItem
-                  onClick={() =>
-                    setTheme(theme === "dark" ? "light" : "dark")
-                  }
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                   className="flex items-center gap-2"
                 >
                   {theme === "dark" ? (

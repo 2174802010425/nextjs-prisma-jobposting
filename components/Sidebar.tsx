@@ -1,10 +1,5 @@
 import Link from "next/link";
-import {
-  LayoutDashboard,
-  Briefcase,
-  Users,
-  Settings,
-} from "lucide-react";
+import { LayoutDashboard, Briefcase, Users, Settings } from "lucide-react";
 
 const menu = [
   {

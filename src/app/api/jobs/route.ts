@@ -5,10 +5,13 @@ import { prisma } from "../../../../libs/prisma";
 export async function POST(req: Request) {
   const session = await auth();
   if (!session?.user || !session) {
-    return NextResponse.json({ message: "Please login to post a job!"}, {status : 401});
+    return NextResponse.json(
+      { message: "Please login to post a job!" },
+      { status: 401 },
+    );
   }
-  if (session.user.role !== 'ADMIN') {
-    return NextResponse.json({message : 'Forbidden'}, {status : 403})
+  if (session.user.role !== "ADMIN") {
+    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   }
   try {
     const data = await req.json();
@@ -25,8 +28,6 @@ export async function POST(req: Request) {
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
-
-
 
 export async function GET(req: Request) {
   try {

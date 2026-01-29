@@ -1,38 +1,37 @@
-'use client'
+"use client";
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 export default function PostJobPage() {
-    const router = useRouter()
+  const router = useRouter();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget)
+    const formData = new FormData(e.currentTarget);
     const data = {
-        title : formData.get('title'),
-        company : formData.get('company'),
-        description : formData.get('description'),
-        type : formData.get('type'),
-        location : formData.get('location'),
-        salary : formData.get('salary')
-    }
+      title: formData.get("title"),
+      company: formData.get("company"),
+      description: formData.get("description"),
+      type: formData.get("type"),
+      location: formData.get("location"),
+      salary: formData.get("salary"),
+    };
     try {
-        const res = await fetch('/api/jobs', {
-            method : "POST",
-            headers : {
-                'Content-Type' : 'application/json'
-            },
-            body : JSON.stringify(data)
-        })
-        const job = await res.json()
-        if (!res.ok) {
-            alert(job.message || 'Only Admin can post a job')
-            return
-        }
-        alert("Create job successfully")
-        router.push('/')
+      const res = await fetch("/api/jobs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const job = await res.json();
+      if (!res.ok) {
+        alert(job.message || "Only Admin can post a job");
+        return;
+      }
+      alert("Create job successfully");
+      router.push("/");
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-
   };
   return (
     <div className="max-w-2xl mx-auto">

@@ -162,7 +162,7 @@ export default async function JobDetail({
                     >
                       Chỉnh sửa bài đăng
                     </Link>
-                    <DeleteButton jobId={job.id}/>
+                    <DeleteButton jobId={job.id} />
                   </div>
                 )}
               </div>

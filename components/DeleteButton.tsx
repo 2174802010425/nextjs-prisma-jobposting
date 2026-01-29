@@ -27,7 +27,6 @@ export default function DeleteButton({ jobId }: { jobId: string }) {
 
   return (
     <>
-      
       <Button
         onClick={() => setOpen(true)}
         className="text-red-600 hover:text-red-800"
@@ -58,7 +57,8 @@ export default function DeleteButton({ jobId }: { jobId: string }) {
             </h3>
 
             <p className="text-gray-600 text-sm text-center mt-3 leading-relaxed">
-              Hành động này <span className="font-semibold">không thể hoàn tác</span>.
+              Hành động này{" "}
+              <span className="font-semibold">không thể hoàn tác</span>.
               <br />
               Bạn có chắc chắn muốn xoá bài đăng này không?
             </p>

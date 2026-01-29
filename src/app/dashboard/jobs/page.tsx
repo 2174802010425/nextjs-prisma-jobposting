@@ -44,7 +44,7 @@ const page = async () => {
 
           <tbody>
             {jobs.map((job) => (
-              <AdminJobsManagement key={job.id} job={job}/>
+              <AdminJobsManagement key={job.id} job={job} />
             ))}
           </tbody>
         </table>

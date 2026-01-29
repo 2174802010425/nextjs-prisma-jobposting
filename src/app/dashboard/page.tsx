@@ -28,7 +28,7 @@ export default async function AdminDashboardPage() {
     prisma.job.count(),
     prisma.application.count(),
   ]);
-  return(
+  return (
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
@@ -37,16 +37,8 @@ export default async function AdminDashboardPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <StatCard
-          title="Users"
-          value={totalUsers}
-          icon={<Users />}
-        />
-        <StatCard
-          title="Jobs"
-          value={totalJobs}
-          icon={<Briefcase />}
-        />
+        <StatCard title="Users" value={totalUsers} icon={<Users />} />
+        <StatCard title="Jobs" value={totalJobs} icon={<Briefcase />} />
         <StatCard
           title="Applications"
           value={totalApplications}

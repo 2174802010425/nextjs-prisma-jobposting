@@ -10,7 +10,7 @@ export default function Header() {
       <span className="font-semibold">Admin</span>
 
       <div>
-        <Link href={'/jobs/post'}>
+        <Link href={"/jobs/post"}>
           <Button className="mr-4 cursor-pointer">Create job</Button>
         </Link>
 

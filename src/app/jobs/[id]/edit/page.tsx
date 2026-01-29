@@ -60,13 +60,12 @@ export default function EditJobPage() {
       const result = await res.json();
       if (!res.ok) {
         alert(result.message || "Only admin can edit this job");
-        return
+        return;
       }
-      alert('Edit job successfully')
-      router.push('/')
-    } catch (error:any) {
+      alert("Edit job successfully");
+      router.push("/");
+    } catch (error: any) {
       alert("Network error, please try again");
-
     }
   };
   return (
