@@ -1,10 +1,8 @@
 "use client";
-import { Job } from "@/generated/prisma";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Eye, Trash2, Pencil } from "lucide-react";
+import { Eye, Pencil } from "lucide-react";
 import DeleteButton from "./DeleteButton";
-const AdminJobsManagement = ({ job }: Job) => {
+const AdminJobsManagement = ({ job }: any) => {
   return (
     <tr key={job.id} className="border-b last:border-none hover:bg-zinc-50">
       {/* Title */}
