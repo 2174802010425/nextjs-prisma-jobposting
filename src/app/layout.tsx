@@ -5,6 +5,8 @@ import Navbar from "../../components/Navbar";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "../../auth";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ToastContainer } from "react-toastify";
+import Footer from "../../components/Footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,9 +39,13 @@ export default async function RootLayout({
             defaultTheme="system"
             enableSystem
           >
-            <div className="min-h-screen bg-background text-foreground">
+            <div className="min-h-screen bg-background text-foreground flex flex-col">
               <Navbar />
-              <main className="container mx-auto px-4 py-8">{children}</main>
+              <main className="container mx-auto px-4 py-8 flex-1">
+                {children}
+              </main>
+              <Footer />
+              <ToastContainer />
             </div>
           </NextThemesProvider>
         </SessionProvider>

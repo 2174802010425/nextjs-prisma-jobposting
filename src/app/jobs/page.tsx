@@ -1,11 +1,16 @@
 import { prisma } from "../../../libs/prisma";
 import Link from "next/link";
-
+import { auth } from "../../../auth";
+import { redirect } from "next/navigation";
 export default async function JobsPage({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const session = await auth();
+  if (!session) {
+    redirect("/auth/signin");
+  }
   const { q, type, location } = await searchParams;
 
   const query = q as string | undefined;
@@ -33,7 +38,9 @@ export default async function JobsPage({
     orderBy: { postedAt: "desc" },
     include: { postedBy: true },
   });
-
+  if (jobs.length === 0) {
+    return <div>Job not found</div>;
+  }
   return (
     <div className="space-y-8">
       <div className="bg-white p-6 rounded-lg shadow-sm">
