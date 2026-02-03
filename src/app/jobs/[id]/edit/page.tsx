@@ -3,10 +3,8 @@ import { FormEvent, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { Job } from "@/generated/prisma";
-import { prisma } from "../../../../../libs/prisma";
 
 export default function EditJobPage() {
-  const [job, setJob] = useState<Job>();
   const [form, setForm] = useState({
     title: "",
     company: "",

@@ -11,6 +11,8 @@ import {
 import { format } from "date-fns";
 import { auth } from "../../../../auth";
 import DeleteButton from "../../../../components/DeleteButton";
+import { Button } from "@/components/ui/button";
+import ApplyButton from "../../../../components/ApplyButton";
 export default async function JobDetail({
   params,
 }: {
@@ -21,6 +23,18 @@ export default async function JobDetail({
   const job = await prisma.job.findUnique({
     where: { id },
   });
+
+  // Check if the current user has already applied to this job
+  const existingApplication = session?.user?.id
+    ? await prisma.application.findUnique({
+        where: {
+          jobId_userId: {
+            jobId: id,
+            userId: session.user.id,
+          },
+        },
+      })
+    : null;
 
   if (!job) {
     return (
@@ -154,7 +168,7 @@ export default async function JobDetail({
                   </div>
                 </div>
 
-                {session?.user.role === "ADMIN" && (
+                {session?.user.role === "ADMIN" ? (
                   <div className="mt-8 space-y-3">
                     <Link
                       href={`/jobs/${job.id}/edit`}
@@ -164,6 +178,8 @@ export default async function JobDetail({
                     </Link>
                     <DeleteButton jobId={job.id} />
                   </div>
+                ) : (
+                  <ApplyButton jobId={job.id} />
                 )}
               </div>
             </div>

@@ -13,7 +13,6 @@ export default async function HomePage() {
   const [jobCount, companyCount, userCount, featuredJobs] = await Promise.all([
     // job count
     prisma.job.count(),
-    // count company
     prisma.job
       .findMany({
         select: { company: true },

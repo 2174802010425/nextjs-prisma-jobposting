@@ -1,6 +1,7 @@
 "use client";
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 export default function PostJobPage() {
   const router = useRouter();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -24,11 +25,16 @@ export default function PostJobPage() {
       });
       const job = await res.json();
       if (!res.ok) {
-        alert(job.message || "Only Admin can post a job");
+        toast.error("You need to fill out all fields");
         return;
       }
-      alert("Create job successfully");
-      router.push("/");
+      toast.success("Create job successfully", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+        closeOnClick: true,
+      });
+      setTimeout(() => router.push("/"), 2000);
     } catch (error) {
       console.log(error);
     }
@@ -133,6 +139,7 @@ export default function PostJobPage() {
             type="text"
             name="salary"
             id="salary"
+            required
             placeholder="e.g., $80,000 - $100,000"
             className="mt-1 block w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
           />
