@@ -9,7 +9,7 @@ export default async function NotifySubscriber(job: Job) {
       isActive: true,
     },
   });
-  const matched = subscribers.filter((sub) => {
+  const matched = subscribers.filter((sub: any) => {
     // lọc địa điểm công việc
     const locationsMatch =
       !sub.location ||
