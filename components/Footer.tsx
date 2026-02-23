@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Briefcase, Mail, MapPin, Phone } from "lucide-react";
 import {
@@ -7,6 +8,9 @@ import {
   FaInstagram,
   FaGithub,
 } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
+import NotifySubscriber from "@/lib/notify-subscribers";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -212,12 +216,12 @@ const Footer = () => {
                   placeholder="Email của bạn"
                   className="flex-1 px-3 py-2 text-sm rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-indigo-500 text-white placeholder:text-gray-500"
                 />
-                <button
+                <Button
                   type="submit"
                   className="px-4 py-2 text-sm bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors font-medium"
                 >
                   Đăng ký
-                </button>
+                </Button>
               </form>
             </div>
           </div>

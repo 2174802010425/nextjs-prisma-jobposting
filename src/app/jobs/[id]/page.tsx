@@ -11,7 +11,6 @@ import {
 import { format } from "date-fns";
 import { auth } from "../../../../auth";
 import DeleteButton from "../../../../components/DeleteButton";
-import { Button } from "@/components/ui/button";
 import ApplyButton from "../../../../components/ApplyButton";
 export default async function JobDetail({
   params,
@@ -35,7 +34,6 @@ export default async function JobDetail({
         },
       })
     : null;
-
   if (!job) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
@@ -60,9 +58,6 @@ export default async function JobDetail({
             <ArrowLeft size={20} className="mr-2" />
             <span className="font-medium">Quay lại</span>
           </Link>
-          <button className="p-2 hover:bg-gray-100 rounded-full transition text-gray-500">
-            <Share2 size={20} />
-          </button>
         </div>
       </div>
 
@@ -179,7 +174,10 @@ export default async function JobDetail({
                     <DeleteButton jobId={job.id} />
                   </div>
                 ) : (
-                  <ApplyButton jobId={job.id} />
+                  <ApplyButton
+                    jobId={job.id}
+                    hasApplied={existingApplication}
+                  />
                 )}
               </div>
             </div>

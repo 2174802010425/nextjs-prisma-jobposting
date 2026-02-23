@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Check } from "lucide-react";
 import { applyToJob } from "../actions/applicantsApplyJobs";
 import { useRouter } from "next/navigation";
-
 interface ApplyButtonProps {
   jobId: string;
+  hasApplied: any;
 }
 
-export default function ApplyButton({ jobId }: ApplyButtonProps) {
+export default function ApplyButton({ jobId, hasApplied }: ApplyButtonProps) {
   const [isPending, startTransition] = useTransition();
   const [message, setMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -36,10 +36,10 @@ export default function ApplyButton({ jobId }: ApplyButtonProps) {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 pt-4">
       <Button
         onClick={handleApply}
-        disabled={isPending || isSuccess}
+        disabled={isPending || isSuccess || hasApplied}
         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isPending ? (
@@ -52,8 +52,13 @@ export default function ApplyButton({ jobId }: ApplyButtonProps) {
             <Check className="mr-2 h-4 w-4" />
             Đã ứng tuyển
           </>
+        ) : hasApplied ? (
+          <>
+            <Check className="mr-2 h-4 w-4" />
+            Đã ứng tuyển
+          </>
         ) : (
-          "Ứng tuyển ngay"
+          "Ứng tuyển ngay "
         )}
       </Button>
 

@@ -19,7 +19,7 @@ export default async function HomePage() {
         distinct: ["company"],
       })
       .then((companies) => companies.length),
-    // count applicants
+    // count applicants (chỉ đếm user bình thường, không tính admin)
     prisma.user.count({ where: { role: "USER" } }),
     // count featured jobs
     prisma.job.findMany({

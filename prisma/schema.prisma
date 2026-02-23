@@ -83,6 +83,14 @@ model Application {
   @@unique([jobId, userId])
 }
 
+model Subscriber {
+  id       String  @id @default(cuid())
+  email    String  @unique
+  isActive Boolean @default(true)
+
+  @@map("subscribers")
+}
+
 enum Role {
   USER
   ADMIN

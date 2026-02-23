@@ -7,6 +7,8 @@ import { auth } from "../../auth";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ToastContainer } from "react-toastify";
 import Footer from "../../components/Footer";
+import { Suspense } from "react";
+import { NavigationProgress } from "../../hooks/useNavigationProgress";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,6 +36,9 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider session={session}>
+          <Suspense fallback={null}>
+            <NavigationProgress />
+          </Suspense>
           <NextThemesProvider
             attribute="class"
             defaultTheme="system"

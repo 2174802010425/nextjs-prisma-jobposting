@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "../../../../auth";
 import { prisma } from "../../../../libs/prisma";
-
+import NotifySubscriber from "@/lib/notify-subscribers";
 export async function POST(req: Request) {
   const session = await auth();
   if (!session?.user || !session) {
@@ -22,6 +22,7 @@ export async function POST(req: Request) {
         postedById: session.user.id,
       },
     });
+    NotifySubscriber(job);
     return NextResponse.json({ success: true, job });
   } catch (error) {
     console.log("error creating jobs", error);
